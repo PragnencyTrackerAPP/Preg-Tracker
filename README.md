@@ -1,21 +1,27 @@
 
-# 🤰 Pregnancy Tracker – React Native Expo App
+# 🤰 Pregnancy Tracker App
+
+A complete mobile application built using **React Native**, **Expo Router**, and **NativeWind**.  
 
 
 ---
 
-## 🚀 Setup Instructions
+# 🚀 Setup Instructions
 
 ### 1️⃣ Create a New Expo App (optional)
 ```bash
 npx create-expo-app@latest
 ````
 
+---
+
 ### 2️⃣ Move into the Project Directory
 
 ```bash
 cd PragnencyTracker
 ```
+
+---
 
 ### 3️⃣ Install All Dependencies
 
@@ -25,9 +31,9 @@ npm install
 
 ---
 
-## ⚙️ Install Required Libraries
+# ⚙️ Install Required Libraries
 
-### 📌 NativeWind + TailwindCSS
+## 📌 NativeWind + TailwindCSS
 
 ```bash
 npm install nativewind
@@ -35,7 +41,7 @@ npm install tailwindcss
 npm install react-native-reanimated
 ```
 
-Initialize Tailwind:
+### Initialize Tailwind:
 
 ```bash
 npx tailwindcss init
@@ -43,7 +49,7 @@ npx tailwindcss init
 
 ---
 
-### 📌 Expo Router
+## 📌 Expo Router
 
 ```bash
 npx expo install expo-router
@@ -51,7 +57,7 @@ npx expo install expo-router
 
 ---
 
-### 📌 Safe Area Context
+## 📌 Safe Area Context
 
 ```bash
 npx expo install react-native-safe-area-context
@@ -59,7 +65,7 @@ npx expo install react-native-safe-area-context
 
 ---
 
-### 📌 Gesture Handler
+## 📌 Gesture Handler
 
 ```bash
 npx expo install react-native-gesture-handler
@@ -67,7 +73,7 @@ npx expo install react-native-gesture-handler
 
 ---
 
-### 📌 Expo Utilities
+## 📌 Expo Utilities
 
 ```bash
 npx expo install expo-splash-screen
@@ -76,7 +82,7 @@ npx expo install expo-status-bar
 
 ---
 
-### 📌 Audio & Video Support (Required for your video player)
+## 📌 Audio & Video Support (Required for your video player)
 
 ```bash
 npx expo install expo-av
@@ -84,7 +90,7 @@ npx expo install expo-av
 
 ---
 
-### 📌 Emoji Support (For Mood Tracker / Custom Moods)
+## 📌 Emoji Support (For Mood Tracker / Custom Moods)
 
 ```bash
 npm install emoji-datasource
@@ -94,95 +100,33 @@ npm install react-native-emoji
 
 ---
 
-## ▶️ Start the App
+# ▶️ Project Commands
+
+### Start the development server
 
 ```bash
 npx expo start
 ```
 
-You can open it via:
-
-* 📱 Android Emulator
-* 🍎 iOS Simulator
-* 📲 Expo Go
-* 🛠️ Development Build
-
 ---
 
-## 📦 Project Features
-
-* 🔐 Authentication (Signup/Login)
-
-* 🏠 Home Dashboard with all cards
-
-* 🍼 Baby Size Tracking
-
-* ❤️ Mood Tracker
-
-* 📅 Upcoming Appointment
-
-* 🧘 Garbha Sanskar Activities
-
-* 📝 Pregnancy Tips
-
-* 🤒 Symptom Tracker
-
-* 📘 Weekly FAQ
-
-* 🎥 Video Library (YouTube Player using `expo-av`)
-
-* ⭐ Testimonials
-
-* 🛍️ Shop Links
-
-* 🎒 Mama’s Kit Tools:
-
-  * Due Date Calculator
-  * Pregnancy Journal
-  * Baby Kick Counter
-  * Food Tracking
-  * Water Intake
-  * Daily Activities
-  * Travel Checklist
-  * Baby Name List
-
-* 🤖 AI Chat Assistant (custom UI)
-
----
-
-## 🗂 Folder Structure
-
-```
-PragnencyTracker
-│── app/                # Screens (Expo Router)
-│── components/         # UI components
-│── constants/          # Static data, images
-│── assets/             # Icons, images
-│── types/              # Image type declarations
-│── tailwind.config.js
-│── babel.config.js
-│── metro.config.js
-│── package.json
-```
-
----
-
-## 🧩 Recommended VS Code Extensions
+### Run on Android
 
 ```bash
-# React Native Tools
-code --install-extension msjsdiag.vscode-react-native
-
-# React / JSX Helpers
-code --install-extension dsznajder.es7-react-js-snippets
-code --install-extension formulahendry.auto-close-tag
-code --install-extension formulahendry.auto-rename-tag
-
+npx expo run:android
 ```
 
 ---
 
-## 🧼 Reset Project (Optional)
+### Run on iOS
+
+```bash
+npx expo run:ios
+```
+
+---
+
+### Reset the project (optional utility)
 
 ```bash
 npm run reset-project
@@ -190,15 +134,75 @@ npm run reset-project
 
 ---
 
-## 📚 Learn More
+# 🧩 Recommended VS Code Extensions
 
-* Expo Docs → [https://docs.expo.dev](https://docs.expo.dev)
-* NativeWind Docs → [https://www.nativewind.dev](https://www.nativewind.dev)
-* React Native Docs → [https://reactnative.dev](https://reactnative.dev)
+```bash
+# ESLint (helps catch errors)
+code --install-extension dbaeumer.vscode-eslint
+
+# Prettier (code formatting)
+code --install-extension esbenp.prettier-vscode
+
+# Tailwind CSS IntelliSense (NativeWind support)
+code --install-extension bradlc.vscode-tailwindcss
+
+# React & Native Snippets
+code --install-extension dsznajder.es7-react-js-snippets
+
+# TypeScript Grammar Support
+code --install-extension ms-vscode.typescript-javascript-grammar
+```
 
 ---
 
+# 📦 Project Features Overview
 
+✔️ **Authentication Flow**
+✔️ **File-based Routing using Expo Router**
+✔️ **Home Dashboard with Components:**
+
+* Baby Size Card
+* Weekly FAQ
+* Mood Tracker
+* Upcoming Appointment
+* Garbha Sanskar Activities
+* Pregnancy Tips
+* Symptom Tracker
+* Testimonials
+* Videos Section
+* Shop Links
+
+✔️ **Mama’s Kit Tools:**
+
+* Due Date Calculator
+* Pregnancy Journal
+* Baby Kick Counter
+* Water Intake Tracker
+* Food Tracking
+* Daily Activities
+* Travel Checklist
+* Baby Name List
+
+✔️ **AI Chat Assistant**
+✔️ **Beautiful Swipeable Cards UI**
+✔️ **Fully Responsive with NativeWind**
+
+---
+
+# 🗂 Folder Structure
+
+```
+PragnencyTracker
+│── app/               # App screens (Expo Router)
+│── components/        # Reusable UI components
+│── constants/         # Images, JSON-like data
+│── assets/            # Images & icons
+│── types/             # Image type declarations
+│── tailwind.config.js
+│── babel.config.js
+│── metro.config.js
+│── package.json
+```
 
 
 

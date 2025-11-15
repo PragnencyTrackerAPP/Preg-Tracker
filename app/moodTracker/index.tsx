@@ -5,8 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import MoodTracker from "../../components/MoodTracker"
 import { moods } from "../../constants/moods"
 
-// Import your local plus icon (uncomment and adjust path)
-// import plusIcon from "../../assets/icons/plus.png"
+
 
 export default function MoodTrackerScreen() {
   const handleMoodSelect = (moodId: string) => {

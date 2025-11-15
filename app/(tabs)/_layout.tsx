@@ -2,8 +2,11 @@ import { Tabs } from "expo-router";
 import { View, Text, Image } from "react-native";
 import { tabsIcon } from "../../constants/tabsIcon";
 
+
+
 function TabIcon({ focused, icon, title }: any) {
   return focused ? (
+
     <View
       style={{
         flexDirection: "row",
@@ -41,11 +44,13 @@ function TabIcon({ focused, icon, title }: any) {
     >
       <Image source={icon} tintColor="#ffffffff" style={{ width: 24, height: 24 }} />
     </View>
+   
   );
 }
 
 export default function TabsLayout() {
   return (
+
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
@@ -107,5 +112,6 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
+   
   );
 }

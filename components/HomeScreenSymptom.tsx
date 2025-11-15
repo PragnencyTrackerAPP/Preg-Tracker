@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { symptoms } from "@/constants/symptoms"; // same images
+import { symptoms } from "@/constants/symptoms";
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 export default function HomeScreen() {
@@ -17,8 +17,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
-        
-        {/* ---------------- Symptoms Tracker Box ---------------- */}
+
         <View
           style={{
             padding: 16,
@@ -81,8 +80,6 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
-
-        {/* ------------------------------------------------------- */}
 
       </ScrollView>
     </SafeAreaView>

@@ -1,11 +1,12 @@
-"use client"
-import { View, Text, Modal, Pressable, StyleSheet } from "react-native"
-import { useLocalSearchParams, useRouter } from "expo-router"
-import DueDateCalculator from "../../../components/Tools/DueDateCalculator"
-import Journal from "../../../components/Tools/Journal"
+"use client";
+
+import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+
+import DueDateCalculator from "../../../components/Tools/DueDateCalculator";
+import Journal from "../../../components/Tools/Journal";
 
 const featureDetails: Record<string, { title: string; description: string }> = {
-  
   "due-date-calculator": {
     title: "Due Date Calculator",
     description: "Calculate your estimated due date based on your last menstrual period.",
@@ -38,47 +39,54 @@ const featureDetails: Record<string, { title: string; description: string }> = {
     title: "Travel Checklist",
     description: "Prepare for travel with a comprehensive pregnancy checklist.",
   },
-}
+};
 
 export default function FeatureDetailScreen() {
-  const { id } = useLocalSearchParams()
-  const router = useRouter()
+  const { id } = useLocalSearchParams();
+  const router = useRouter();
 
   const renderFeatureComponent = () => {
     switch (id) {
       case "due-date-calculator":
-        return <DueDateCalculator />
+        return <DueDateCalculator />;
       case "journal":
-        return <Journal />
+        return <Journal />;
       default:
         return (
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontSize: 16, color: "#6b7280" }}>Feature not found</Text>
+          <View style={styles.notFoundContainer}>
+            <Text style={styles.notFoundText}>Feature not found</Text>
           </View>
-        )
+        );
     }
-  }
+  };
 
   return (
-    <Modal transparent visible={true} animationType="fade" onRequestClose={() => router.back()}>
-      <Pressable
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-        }}
-        onPress={() => router.back()}
-      />
+    <Modal transparent visible animationType="fade" onRequestClose={() => router.back()}>
+      <Pressable style={styles.backdrop} onPress={() => router.back()} />
 
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 16,
-        }}
-      >
-        {renderFeatureComponent()}
-      </View>
+      <View style={styles.modalContainer}>{renderFeatureComponent()}</View>
     </Modal>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  notFoundContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  notFoundText: {
+    fontSize: 16,
+    color: "#6b7280",
+  },
+  backdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+});

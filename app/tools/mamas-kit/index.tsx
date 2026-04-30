@@ -1,11 +1,11 @@
-
-import { View, ScrollView, Text, TouchableOpacity } from "react-native"
+import { useRouter } from "expo-router";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router"
-import FeatureCard from "../../../components/Tools/FeatureCard"
+
+import FeatureCard from "../../../components/Tools/FeatureCard";
 // Update the import path to match the actual location and casing of the tools file
 // Update the import path to match the actual location and casing of the tools file
-import { tools } from "../../../constants/tools"
+import { tools } from "../../../constants/tools";
 
 const features = [
   {
@@ -56,79 +56,105 @@ const features = [
     image: tools.travelChecklist,
     badge: true,
   },
-]
+];
 
 export default function MamasKitScreen() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleCardPress = (featureId: string) => {
     if (featureId === "due-date-calculator") {
-      router.push("/tools/due-date-calculator")
+      router.push("/tools/due-date-calculator");
     } else if (featureId === "journal") {
-      router.push("/tools/journal" )
+      router.push("/tools/journal");
     } else {
-      router.push(`/tools/features/${featureId}`)
+      router.push(`/tools/features/${featureId}`);
     }
-  }
+  };
 
   const handleBackPress = () => {
-    router.back()
-  }
+    router.back();
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: 16,
-          paddingVertical: 12,
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <TouchableOpacity
-          onPress={handleBackPress}
-          style={{
-            width: 24,
-            height: 24,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ fontSize: 24, fontWeight: "600", color: "#000" }}>{"<"}</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
+          <Text style={styles.backButtonText}>{"<"}</Text>
         </TouchableOpacity>
-        <Text style={{ fontSize: 18, fontWeight: "600", color: "#000" }}>Mama's Kit</Text>
-        <View style={{ width: 24 }} />
+        <Text style={styles.headerTitle}>Mama's Kit</Text>
+        <View style={styles.headerSpacer} />
       </View>
 
       <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          paddingHorizontal: 12,
-          paddingVertical: 16,
-        }}
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
+        <View style={styles.grid}>
           {features.map((feature) => (
-            <View key={feature.id} style={{ width: "48%", marginBottom: 16 }}>
-              <FeatureCard {...({
-                title: feature.title,
-                image: feature.image,
-                badge: feature.badge,
-                onPress: () => handleCardPress(feature.id),
-              } as any)} />
+            <View key={feature.id} style={styles.gridItem}>
+              <FeatureCard
+                {...({
+                  title: feature.title,
+                  image: feature.image,
+                  badge: feature.badge,
+                  onPress: () => handleCardPress(feature.id),
+                } as any)}
+              />
             </View>
           ))}
         </View>
       </ScrollView>
     </SafeAreaView>
-  )
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: "#ffffff",
+  },
+  backButton: {
+    width: 24,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backButtonText: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#000",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#000",
+  },
+  headerSpacer: {
+    width: 24,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingHorizontal: 12,
+    paddingVertical: 16,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  gridItem: {
+    width: "48%",
+    marginBottom: 16,
+  },
+});

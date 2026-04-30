@@ -1,16 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import {
-  View,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  TextInput,
   Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useState } from "react";
-import { symptoms as symptomImages } from "@/constants/symptoms"; // ✅ Import all images
+
+import { symptoms as symptomImages } from "@/constants/symptoms"; // âœ… Import all images
 
 interface Symptom {
   id: string;
@@ -57,7 +59,7 @@ export default function AddSymptoms({ onClose, onSave }: AddSymptomsProps) {
     setSelectedSymptoms((prev) =>
       prev.includes(symptomId)
         ? prev.filter((id) => id !== symptomId)
-        : [...prev, symptomId]
+        : [...prev, symptomId],
     );
   };
 
@@ -69,125 +71,47 @@ export default function AddSymptoms({ onClose, onSave }: AddSymptomsProps) {
   return (
     <SafeAreaProvider>
       {/* Header */}
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: 16,
-          paddingVertical: 12,
-          borderBottomWidth: 1,
-          borderBottomColor: "#f0f0f0",
-        }}
-      >
-        <TouchableOpacity
-          onPress={onClose}
-          style={{
-            width: 24,
-            height: 24,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ fontSize: 24, fontWeight: "600", color: "#000" }}>
-            {"<"}
-          </Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={onClose} style={styles.backButton}>
+          <Text style={styles.backButtonText}>{"<"}</Text>
         </TouchableOpacity>
 
-        <Text
-          style={{
-            fontSize: 18,
-            fontWeight: "600",
-            color: "#000",
-            flex: 1,
-            textAlign: "center",
-          }}
-        >
-          Add Symptoms
-        </Text>
+        <Text style={styles.headerTitle}>Add Symptoms</Text>
 
-        <TouchableOpacity
-          onPress={handleSave}
-          style={{
-            backgroundColor: "#4db5a6",
-            paddingHorizontal: 16,
-            paddingVertical: 8,
-            borderRadius: 20,
-          }}
-        >
-          <Text style={{ color: "#ffffff", fontSize: 14, fontWeight: "600" }}>
-            Save
-          </Text>
+        <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
+          <Text style={styles.saveButtonText}>Save</Text>
         </TouchableOpacity>
       </View>
 
       {/* Body */}
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Symptoms grid */}
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            padding: 12,
-            justifyContent: "space-between",
-          }}
-        >
-          {symptoms.map((symptom) => (
-            <TouchableOpacity
-              key={symptom.id}
-              onPress={() => toggleSymptom(symptom.id)}
-              style={{
-                width: "48%",
-                flexDirection: "row",
-                alignItems: "center",
-                paddingVertical: 12,
-                paddingHorizontal: 12,
-                marginBottom: 8,
-                borderRadius: 12,
-                backgroundColor: selectedSymptoms.includes(symptom.id)
-                  ? "#e8f5f3"
-                  : "#f9f9f9",
-                borderWidth: 1,
-                borderColor: selectedSymptoms.includes(symptom.id)
-                  ? "#4db5a6"
-                  : "#f0f0f0",
-              }}
-            >
-              <Image
-                source={symptom.image}
-                style={{ width: 32, height: 32, marginRight: 8 }}
-              />
-              <Text style={{ fontSize: 14, fontWeight: "500", color: "#333" }}>
-                {symptom.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
+        <View style={styles.grid}>
+          {symptoms.map((symptom) => {
+            const isSelected = selectedSymptoms.includes(symptom.id);
+
+            return (
+              <TouchableOpacity
+                key={symptom.id}
+                onPress={() => toggleSymptom(symptom.id)}
+                style={[
+                  styles.symptomCard,
+                  isSelected && styles.symptomCardSelected,
+                ]}
+              >
+                <Image source={symptom.image} style={styles.symptomImage} />
+                <Text style={styles.symptomText}>{symptom.name}</Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
 
         {/* Notes */}
-        <View style={{ paddingHorizontal: 16, paddingVertical: 20 }}>
-          <Text
-            style={{
-              fontSize: 14,
-              fontWeight: "600",
-              color: "#333",
-              marginBottom: 8,
-            }}
-          >
-            Add Notes
-          </Text>
+        <View style={styles.notesContainer}>
+          <Text style={styles.notesLabel}>Add Notes</Text>
 
           <TextInput
-            style={{
-              borderWidth: 1,
-              borderColor: "#e0e0e0",
-              borderRadius: 8,
-              paddingHorizontal: 12,
-              paddingVertical: 10,
-              fontSize: 14,
-              color: "#333",
-              textAlignVertical: "top",
-            }}
+            style={styles.notesInput}
             placeholder="Write down what's going on for you"
             placeholderTextColor="#999"
             multiline
@@ -200,3 +124,99 @@ export default function AddSymptoms({ onClose, onSave }: AddSymptomsProps) {
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  backButton: {
+    width: 24,
+    height: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backButtonText: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#000",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#000",
+    flex: 1,
+    textAlign: "center",
+  },
+  saveButton: {
+    backgroundColor: "#4db5a6",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  saveButtonText: {
+    color: "#ffffff",
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    padding: 12,
+    justifyContent: "space-between",
+  },
+  symptomCard: {
+    width: "48%",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    marginBottom: 8,
+    borderRadius: 12,
+    backgroundColor: "#f9f9f9",
+    borderWidth: 1,
+    borderColor: "#f0f0f0",
+  },
+  symptomCardSelected: {
+    backgroundColor: "#e8f5f3",
+    borderColor: "#4db5a6",
+  },
+  symptomImage: {
+    width: 32,
+    height: 32,
+    marginRight: 8,
+  },
+  symptomText: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#333",
+  },
+  notesContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+  },
+  notesLabel: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 8,
+  },
+  notesInput: {
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 14,
+    color: "#333",
+    textAlignVertical: "top",
+  },
+});

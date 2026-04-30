@@ -1,11 +1,16 @@
 import React from "react";
-import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import VideoCard from "../../components/VideoCard";
 
 const videoData = [
-  { id: "1", title: "5th Week of Pregnancy", url: "https://www.youtube.com/watch?v=BHACKCNDMW8&list=RDBHACKCNDMW8&start_radio=1" },
+  {
+    id: "1",
+    title: "5th Week of Pregnancy",
+    url: "https://www.youtube.com/watch?v=BHACKCNDMW8&list=RDBHACKCNDMW8&start_radio=1",
+  },
   { id: "2", title: "Pregnancy Nutrition Guide", url: "https://www.youtube.com/watch?v=G1hKzCkywM8" },
   { id: "3", title: "Baby Development Explained", url: "https://www.youtube.com/watch?v=YFhwEJosUsU" },
   { id: "4", title: "First Trimester Tips", url: "https://www.youtube.com/watch?v=linlz7-Pnvw&t=60s" },
@@ -19,14 +24,13 @@ export default function AllVideos() {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
-
         <View style={styles.header}>
           <Pressable onPress={() => router.back()}>
-            <Text style={styles.link}>← Back</Text>
+            <Text style={styles.link}>â† Back</Text>
           </Pressable>
 
           <Text style={styles.title}>All Videos</Text>
-          <View style={{ width: 40 }} />
+          <View style={styles.headerSpacer} />
         </View>
 
         <FlatList
@@ -54,6 +58,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
+  headerSpacer: { width: 40 },
   title: { fontSize: 18, fontWeight: "600" },
   link: { color: "#1D9BF0", fontWeight: "500" },
   card: { marginBottom: 16 },

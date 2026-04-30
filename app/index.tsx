@@ -1,134 +1,82 @@
 "use client";
 
 import React from "react";
-import { View, ScrollView, Text, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-// Importing all components (must be default exports)
-import Header from "@/app/header";
 import BabySizeCard from "@/app/babySizeCard";
-import UpcomingAppointment  from "@/app/upcomingAppointment";
-import PlansCardHomeScreen from "@/app/plansCardHomeScreen";
-import GarbhaSanskarCard from "@/app/garbhaSanskarCard";
-import HelpfulTipsCard from "@/app/helpfulTipsCard";
-import MoodTracker from "@/app/moodTracker";
-import PregnancyTipCard from "@/app/pregnancyTipCard";
-import HomeScreenSymptom from "@/app/homeScreenSymptom";
-import WeeklyFAQ from "@/app/weeklyFAQ";
 import BumpCard from "@/app/bumpCard";
-import VideoCard from "@/app/videoCard";
-import Testimonials from "@/app/testimonials";
+import GarbhaSanskarCard from "@/app/garbhaSanskarCard";
+import Header from "@/app/header";
+import HelpfulTipsCard from "@/app/helpfulTipsCard";
+import HomeScreenSymptom from "@/app/homeScreenSymptom";
+import MoodTracker from "@/app/moodTracker";
+import PlansCardHomeScreen from "@/app/plansCardHomeScreen";
+import PregnancyTipCard from "@/app/pregnancyTipCard";
 import ShopLinks from "@/app/shopLinks";
-
-
+import Testimonials from "@/app/testimonials";
+import UpcomingAppointment from "@/app/upcomingAppointment";
+import VideoCard from "@/app/videoCard";
+import WeeklyFAQ from "@/app/weeklyFAQ";
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#ebf7f7ff" }}>
+    <SafeAreaView style={styles.container}>
       <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingHorizontal: 2,
-          paddingBottom: 100, // space for bottom buttons + tab menu
-        }}
+        contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-
-        
         {/* Header */}
         <Header />
 
-
-        
-        <View
-          style={{
-            alignItems: "center",
-            marginTop: 20,
-            marginBottom: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 32,
-              fontWeight: "700",
-              color: "#1f2937",
-              marginBottom: 8,
-            }}
-          >
-            Pregnancy Tracker
-          </Text>
-          <Text style={{ fontSize: 16, color: "#20094D" }}>
-            Track your pragnancy journey
-          </Text>
+        <View style={styles.heroContainer}>
+          <Text style={styles.title}>Pregnancy Tracker</Text>
+          <Text style={styles.subtitle}>Track your pragnancy journey</Text>
         </View>
 
         {/* ACTION BUTTONS */}
-        <View style={{ width: "100%", gap: 16, marginTop: 30 }}>
+        <View style={styles.actionsContainer}>
           {/* Sign Up */}
           <TouchableOpacity
-            style={{
-              backgroundColor: "#20094D",
-              paddingVertical: 16,
-              borderRadius: 12,
-              alignItems: "center",
-            }}
+            style={styles.actionButton}
             onPress={() => router.push("/auth/signup")}
           >
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-              Sign Up
-            </Text>
+            <Text style={styles.actionButtonText}>Sign Up</Text>
           </TouchableOpacity>
 
           {/* Plans Card */}
           <TouchableOpacity
-            style={{
-              backgroundColor: "#20094D",
-              paddingVertical: 16,
-              borderRadius: 12,
-              alignItems: "center",
-            }}
+            style={styles.actionButton}
             onPress={() => router.push("/plansCard")}
           >
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-              Plans Card
-            </Text>
+            <Text style={styles.actionButtonText}>Plans Card</Text>
           </TouchableOpacity>
 
           {/* AI Chat Assistant */}
           <TouchableOpacity
-            style={{
-              backgroundColor: "#20094D",
-              paddingVertical: 16,
-              borderRadius: 12,
-              alignItems: "center",
-            }}
+            style={styles.actionButton}
             onPress={() => router.push("/aiChatAssistant")}
           >
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-              AI Chat Assistant
-            </Text>
+            <Text style={styles.actionButtonText}>AI Chat Assistant</Text>
           </TouchableOpacity>
 
           {/* Symptoms Tracker */}
           <TouchableOpacity
-            style={{
-              backgroundColor: "#20094D",
-              paddingVertical: 16,
-              borderRadius: 12,
-              alignItems: "center",
-              marginBottom: 14
-            }}
+            style={[styles.actionButton, styles.lastActionButton]}
             onPress={() => router.push("/symptoms")}
           >
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-              Symptoms Tracker
-            </Text>
+            <Text style={styles.actionButtonText}>Symptoms Tracker</Text>
           </TouchableOpacity>
         </View>
-
 
         {/* COMPONENTS SHOWN DIRECTLY */}
         <BabySizeCard />
@@ -145,9 +93,53 @@ export default function HomeScreen() {
         <VideoCard />
         <Testimonials />
         <ShopLinks />
-
-       
       </ScrollView>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#ebf7f7ff",
+  },
+  contentContainer: {
+    flexGrow: 1,
+    paddingHorizontal: 2,
+    paddingBottom: 100,
+  },
+  heroContainer: {
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "700",
+    color: "#1f2937",
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: "#20094D",
+  },
+  actionsContainer: {
+    width: "100%",
+    gap: 16,
+    marginTop: 30,
+  },
+  actionButton: {
+    backgroundColor: "#20094D",
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+  lastActionButton: {
+    marginBottom: 14,
+  },
+  actionButtonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});

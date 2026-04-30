@@ -1,74 +1,38 @@
 import { Tabs } from "expo-router";
-import { View, Text, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+
 import { tabsIcon } from "../../constants/tabsIcon";
 
+type TabIconProps = {
+  focused: boolean;
+  icon: any;
+  title: string;
+};
 
+function TabIcon({ focused, icon, title }: TabIconProps) {
+  if (focused) {
+    return (
+      <View style={styles.activeTabIcon}>
+        <Image source={icon} style={styles.activeIcon} />
+        <Text style={styles.activeTabTitle}>{title}</Text>
+      </View>
+    );
+  }
 
-function TabIcon({ focused, icon, title }: any) {
-  return focused ? (
-
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        minWidth: 112,
-        minHeight: 70,
-        marginTop: 16,
-        borderRadius: 35,
-        paddingHorizontal: 16,
-      }}
-    >
-      <Image source={icon} tintColor="#ffffffff" style={{ width: 22, height: 28 }} />
-      <Text
-        style={{
-          marginLeft: 8,
-          color: "#ffffffff",
-          fontWeight: "600",
-          fontSize: 12,
-        }}
-      >
-        {title}
-      </Text>
+  return (
+    <View style={styles.inactiveTabIcon}>
+      <Image source={icon} style={styles.inactiveIcon} />
     </View>
-  ) : (
-    <View
-      style={{
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 4,
-        width: 52,
-        height: 52,
-        borderRadius: 25,
-      }}
-    >
-      <Image source={icon} tintColor="#ffffffff" style={{ width: 24, height: 24 }} />
-    </View>
-   
   );
 }
 
 export default function TabsLayout() {
   return (
-
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarItemStyle: {
-          justifyContent: "center",
-          alignItems: "center",
-        },
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 30,
-          marginHorizontal: 15,
-          height: 60,
-          borderRadius: 50,
-          backgroundColor: "#4CA2A3",
-          borderWidth: 1,
-          overflow: "hidden",
-          elevation: 5,
-        },
+        tabBarItemStyle: styles.tabBarItem,
+        tabBarStyle: styles.tabBar,
       }}
     >
       <Tabs.Screen
@@ -97,7 +61,11 @@ export default function TabsLayout() {
           title: "Mama's Kit",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={tabsIcon.mamasKit} title="Mama's Kit" />
+            <TabIcon
+              focused={focused}
+              icon={tabsIcon.mamasKit}
+              title="Mama's Kit"
+            />
           ),
         }}
       />
@@ -112,6 +80,57 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
-   
   );
 }
+
+const styles = StyleSheet.create({
+  activeTabIcon: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 112,
+    minHeight: 70,
+    marginTop: 16,
+    borderRadius: 35,
+    paddingHorizontal: 16,
+  },
+  activeIcon: {
+    width: 22,
+    height: 28,
+    tintColor: "#ffffffff",
+  },
+  activeTabTitle: {
+    marginLeft: 8,
+    color: "#ffffffff",
+    fontWeight: "600",
+    fontSize: 12,
+  },
+  inactiveTabIcon: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 4,
+    width: 52,
+    height: 52,
+    borderRadius: 25,
+  },
+  inactiveIcon: {
+    width: 24,
+    height: 24,
+    tintColor: "#ffffffff",
+  },
+  tabBarItem: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tabBar: {
+    position: "absolute",
+    bottom: 30,
+    marginHorizontal: 15,
+    height: 60,
+    borderRadius: 50,
+    backgroundColor: "#4CA2A3",
+    borderWidth: 1,
+    overflow: "hidden",
+    elevation: 5,
+  },
+});
